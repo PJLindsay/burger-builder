@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import styles from './Burger.module.css'
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
@@ -29,4 +30,5 @@ const burger = (props) => {
   );
 }
 
-export default burger;
+// wrap withRouter so top-level component passes down route properties (match, history, location)
+export default withRouter(burger);
