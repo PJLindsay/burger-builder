@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
+import axios from '../../../axios-orders';
 
 import styles from './ContactData.module.css';
 
@@ -10,7 +11,39 @@ class ContactData extends Component {
     address: {
       street: '',
       postalCode: ''
+    },
+    loading: false
+  }
+
+  orderHandler = (event) => {
+    event.preventDefault(); // prevent send request - interesting compared to Vue way
+    // console.log('ingredients: ', this.props.ingredients )
+
+    this.setState({ loading: true });
+
+    const order = {
+      ingredients: this.props.ingredients,
+      price: this.props.price,
+      customer: {
+        name: 'PJ Burgerssen',
+        address: {
+          street: '123 Main Street',
+          zipCode: '332257',
+          country: 'Canada'
+        },
+        email: 'test@localhost.com'
+      },
+      deliveryMethod: 'fastest'
     }
+
+    axios.post('/orders.json', order)
+      .then(response => {
+        this.setState({ loading: false })
+      })
+      .catch(error=> {
+        this.setState({ loading: false })
+        console.error(error)
+      })
   }
 
   render() {
@@ -22,7 +55,7 @@ class ContactData extends Component {
           <input className={styles.Input} type="email" name="email" placeholder="Your email" />
           <input className={styles.Input} type="text" name="street" placeholder="Street" />
           <input className={styles.Input} type="text" name="postal" placeholder="Postal Code" />
-          <Button btnType="Success">ORDER</Button>
+          <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>
       </div>
     );
