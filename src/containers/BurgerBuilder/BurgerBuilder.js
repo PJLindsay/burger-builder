@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
-import firebaseurl from '../../firebase.js'
+// import firebaseurl from '../../firebase.js'
 
 const INGREDIENT_PRICES = {
   lettuce: 0.5,
@@ -31,13 +31,13 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount () {
-    axios.get(`${firebaseurl}/ingredients.json`)
-      .then(response => {
-        this.setState({ingredients: response.data})
-      })
-      .catch(error => {
-        this.setState({error: true})
-      })
+    // axios.get(`${firebaseurl}/ingredients.json`)
+    //   .then(response => {
+    //     this.setState({ingredients: response.data})
+    //   })
+    //   .catch(error => {
+    //     this.setState({error: true})
+    //   })
   }
 
   addIngredientHandler = (type) => {
