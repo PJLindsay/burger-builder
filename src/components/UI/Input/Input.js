@@ -3,11 +3,15 @@ import React from 'react';
 import styles from './Input.module.css';
 
 const input = (props) => {
+
   let inputElement = null;
   const inputStyles = [styles.InputElement];
 
+  let validationError  = null;
+
   if (props.invalid && props.shouldValidate && props.touched) {
     inputStyles.push(styles.Invalid)
+    validationError = <p className={styles.ValidationError}>Please enter a valid {props.elementConfig.placeholder}!</p>
   }
 
   switch(props.elementType) {
@@ -61,6 +65,7 @@ const input = (props) => {
     <div className={styles.Input}>
       <label className={styles.Label}>{props.label}</label>
       {inputElement}
+      {validationError}
     </div>
   )
 };

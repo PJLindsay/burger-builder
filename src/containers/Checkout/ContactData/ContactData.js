@@ -13,7 +13,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your name'
+          placeholder: 'Name'
         },
         value: '',
         validation: {
@@ -67,7 +67,7 @@ class ContactData extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your E-mail'
+          placeholder: 'E-mail'
         },
         value: '',
         validation: {
