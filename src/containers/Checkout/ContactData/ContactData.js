@@ -65,7 +65,6 @@ class ContactData extends Component {
 
   orderHandler = (event) => {
     event.preventDefault(); // prevent send request - interesting compared to Vue way
-    // console.log('ingredients: ', this.props.ingredients )
 
     this.setState({ loading: true });
 
@@ -86,6 +85,24 @@ class ContactData extends Component {
       });
   }
 
+  // this is an example of immutable object style (core react concept)
+  inputChangedHandler = (event, inputIdentifier) => {
+
+    // NOTE1: this is a shallow copy
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    }
+
+    // NOTE2: so we need to get form element values too
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    }
+
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({orderForm: updatedOrderForm})
+  }
+
   render() {
 
     const formElements = []
@@ -104,11 +121,9 @@ class ContactData extends Component {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-        <Input inputtype="input" type="text" name="street" placeholder="Street" />
-        <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
         <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
       </form>
     );
