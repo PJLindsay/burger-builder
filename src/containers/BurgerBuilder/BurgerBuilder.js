@@ -19,13 +19,11 @@ const INGREDIENT_PRICES = {
   bacon: 1.25
 };
 
-const BASE_PRICE_BURGER = 4;
-
 class BurgerBuilder extends Component {
 
   state = {
     ingredients: null,
-    totalPrice: BASE_PRICE_BURGER,
+    totalPrice: 0,
     canPurchase: false,
     purchasing: false,
     loading: false,
