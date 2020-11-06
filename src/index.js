@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 
 // allows async code in action creators
 // see: https://github.com/zalmoxisus/redux-devtools-extension
-const store = createStore(burgerBuilderReducer, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
 
