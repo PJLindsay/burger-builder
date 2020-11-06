@@ -1,31 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Modal from '../../components/UI/Modal/Modal';
-import Aux from '../Aux/Aux';
+import Modal from '../../components/UI/Modal/Modal'
+import Aux from '../Aux/Aux'
 
-const withErrorHandler = ( WrappedComponent, axios ) => {
+const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
-
     state = {
-      error: null
+      error: null,
     }
 
     // TODO: rewrite this to use hook later (replace componentWillMount)
-    componentDidMount () {
-
+    componentDidMount() {
       // clear prior error on request
-      this.reqInterceptor = axios.interceptors.request.use(req => {
+      this.reqInterceptor = axios.interceptors.request.use((req) => {
         this.setState({ error: null })
-        return req;
-      });
+        return req
+      })
 
-      this.resInterceptor = axios.interceptors.response.use(res => res, error => {
-        this.setState({ error: error })
-      });
+      this.resInterceptor = axios.interceptors.response.use(
+        (res) => res,
+        (error) => {
+          this.setState({ error: error })
+        }
+      )
     }
 
     // remove any attached interceptors when we unmount so we don't have memory leaks
-    componentWillUnmount () {
+    componentWillUnmount() {
       axios.interceptors.request.eject(this.reqInterceptor)
       axios.interceptors.response.eject(this.resInterceptor)
     }
@@ -41,7 +42,7 @@ const withErrorHandler = ( WrappedComponent, axios ) => {
             show={this.state.error}
             modalClosed={this.errorConfirmedHandler}
           >
-            { this.state.error ? this.state.error.message : null }
+            {this.state.error ? this.state.error.message : null}
           </Modal>
           <WrappedComponent {...this.props} />
         </Aux>
@@ -50,4 +51,4 @@ const withErrorHandler = ( WrappedComponent, axios ) => {
   }
 }
 
-export default withErrorHandler;
+export default withErrorHandler

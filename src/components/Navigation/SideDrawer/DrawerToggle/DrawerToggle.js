@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './DrawerToggle.module.css';
+import styles from './DrawerToggle.module.css'
 
 const drawerToggle = (props) => (
   <div className={styles.DrawerToggle} onClick={props.clicked}>
@@ -10,4 +10,4 @@ const drawerToggle = (props) => (
   </div>
 )
 
-export default drawerToggle;
+export default drawerToggle

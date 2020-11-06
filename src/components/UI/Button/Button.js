@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './Button.module.css';
+import styles from './Button.module.css'
 
 const button = (props) => (
   <button
@@ -12,4 +12,4 @@ const button = (props) => (
   </button>
 )
 
-export default button;
+export default button
