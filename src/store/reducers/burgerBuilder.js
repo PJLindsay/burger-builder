@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const BASE_PRICE_BURGER = 4;
 
@@ -20,38 +21,32 @@ const reducer = ( state = initialState, action ) => {
   switch (action.type) {
 
     case actionTypes.ADD_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-        },
+      const addedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1 }
+      const itemsWithAddition = updateObject(state.ingredients, addedIngredient)
+      const addedState = {
+        ingredients: itemsWithAddition,
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-      };
+      }
+      return updateObject(state, addedState);
 
     case actionTypes.REMOVE_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] - 1
-        },
+      const removedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1 }
+      const itemsWithRemoval = updateObject(state.ingredients, removedIngredient)
+      const removedState = {
+        ingredients: itemsWithRemoval,
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
-      };
+      }
+      return updateObject(state, removedState);
 
       case actionTypes.SET_INGREDIENTS:
-        return {
-          ...state,
+        return updateObject(state, {
           ingredients: action.ingredients,
           totalPrice: BASE_PRICE_BURGER,
           error: false
-        };
+        })
 
       case actionTypes.FETCH_INGREDIENTS_FAILED:
-        return {
-          ...state,
-          error: true
-        };
+        return updateObject(state, { error: true });
 
     default:
       return state;
