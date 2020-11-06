@@ -70,10 +70,9 @@ export const fetchOrders = (token, userId) => {
   return dispatch => {
 
     dispatch(fetchOrdersStart)
+    // ".indexOn": ["userId"] rule must be added to "orders" rules in Google Firebase for this to work
     const queryParams = `&orderBy="userId"&equalTo="${userId}"`
-    // const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"'
 
-    // axios.get(`${firebaseurl}/orders.json?auth=${token}` + queryParams)
     axios.get(`${firebaseurl}/orders.json?auth=${token}` + queryParams)
     .then(response => {
       const fetchedOrders = []
