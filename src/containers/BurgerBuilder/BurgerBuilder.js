@@ -11,7 +11,6 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
-
 import * as actions from '../../store/actions/index'; // index.js will be automatically picked up
 
 class BurgerBuilder extends Component {
