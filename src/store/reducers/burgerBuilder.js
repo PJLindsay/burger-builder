@@ -6,7 +6,8 @@ const BASE_PRICE_BURGER = 4;
 const initialState = {
   ingredients: null,
   totalPrice: BASE_PRICE_BURGER,
-  error: false
+  error: false,
+  building: false // is user making a burger? (if need to login we will remember and redirect to their order after sign-in)
 };
 
 const INGREDIENT_PRICES = {
@@ -21,7 +22,8 @@ const addIngredient = (state, action) => {
   const itemsWithAddition = updateObject(state.ingredients, addedIngredient)
   const addedState = {
     ingredients: itemsWithAddition,
-    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    building: true
   }
   return updateObject(state, addedState);
 }
@@ -31,7 +33,8 @@ const removeIngredient = (state, action) => {
   const itemsWithRemoval = updateObject(state.ingredients, removedIngredient)
   const removedState = {
     ingredients: itemsWithRemoval,
-    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+    building: true
   }
   return updateObject(state, removedState);
 }
@@ -40,7 +43,8 @@ const setIngredients = (state, action) => {
   return updateObject(state, {
     ingredients: action.ingredients,
     totalPrice: BASE_PRICE_BURGER,
-    error: false
+    error: false,
+    building: false
   })
 }
 
