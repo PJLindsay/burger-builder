@@ -65,13 +65,16 @@ export const fetchOrdersStart = () => {
 }
 
 // async code
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
 
   return dispatch => {
 
     dispatch(fetchOrdersStart)
+    const queryParams = `&orderBy="userId"&equalTo="${userId}"`
+    // const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"'
 
-    axios.get(`${firebaseurl}/orders.json?auth=${token}`)
+    // axios.get(`${firebaseurl}/orders.json?auth=${token}` + queryParams)
+    axios.get(`${firebaseurl}/orders.json?auth=${token}` + queryParams)
     .then(response => {
       const fetchedOrders = []
       for (let key in response.data) {
