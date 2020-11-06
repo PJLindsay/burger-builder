@@ -19,7 +19,7 @@ class App extends Component {
 
   render() {
 
-    // default routes
+    // default routes - Redirect unknown/unrecognized routes to /
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
